@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Daffodil_Isfeatured",
+    "type": "magento-module",
+    "license": "GPL",
+    "homepage": "",
+    "description": "Manage featured product with scroller",
+    "authors": [
+    {
+        "name": "Daffodil Software",
+        "email": "ashish.mittal@daffodilsw.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

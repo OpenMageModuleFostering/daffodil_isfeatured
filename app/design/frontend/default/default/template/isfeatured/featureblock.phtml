@@ -1,0 +1,71 @@
+<?php
+/*
+ * Featured product Extension Developed by Daffodil S/w Ltd. 
+ */
+?>
+<?php
+$products = $this->ftotalProduct();
+$prodIds = $products->getAllIds();
+$ftotalproduct = count($prodIds);
+$_item = $this->getStoreconfig();
+$enable = $_item['enabled'];
+$title = $_item['title'];
+$limit = $_item['limit'];
+?>
+<?php if ($enable): ?>
+    <div class="featured">
+        <div class="fhead">
+            <strong> 
+                <span>
+                    <?php echo $this->__($title); ?>
+                </span>
+            </strong>
+        </div>
+        <?php if ($ftotalproduct): ?>
+            <div class="items">
+                <ul class="bxslider" id="bxslider">
+                    <?php $count = 1; ?>
+                    <?php foreach ($products as $_product) : ?>
+                        <?php if ($count <= $limit): ?>
+                            <li class="productdiv">
+                                <a href="<?php echo $this->getUrl($_product->getUrlPath()) ?>" >
+                                    <span>
+                                        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(170) ?>" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" />
+                                    </span>
+                                </a>
+                                <span class="productname">
+                                    <a href="<?php echo $this->getUrl($_product->getUrlPath()) ?>" ><?php echo $_product->getName(); ?>
+                                    </a>                   
+                                </span>
+                                <span class="price-con"><?php echo Mage_Catalog_Block_Product::getPriceHtml($_product, true) ?></span>
+                                <span class="fadd">
+                                    <p>
+                                        <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation(' <?php echo $this->helper('checkout/cart')->getAddUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                                    </p>
+                                </span>
+                            </li>
+                    <?php endif; ?>
+                    <?php $count++ ?>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="show-msg">
+            <?php echo $this->__("There are no feature products."); ?> 
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<script type="text/javascript">
+                            jQuery(document).ready(function() {
+                                jQuery('#bxslider').bxSlider({
+                                    minSlides: 1,
+                                    maxSlides: 4,
+                                    slideWidth: 160,
+                                    slideMargin: 5
+                                });
+                            });
+</script>
+
+
+
